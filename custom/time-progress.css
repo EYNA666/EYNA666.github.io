@@ -1,0 +1,176 @@
+.time-progress-card {
+  position: relative;
+  isolation: isolate;
+  box-sizing: border-box;
+  margin-top: 12px;
+  overflow: hidden;
+  border-radius: 18px;
+  border: 1px solid var(--border-color);
+  background: linear-gradient(
+    145deg,
+    var(--background-color),
+    var(--second-background-color)
+  );
+  box-shadow: var(--redefine-box-shadow-flat);
+  color: var(--second-text-color);
+}
+
+.time-progress-card::before {
+  position: absolute;
+  z-index: -1;
+  top: -65px;
+  right: -65px;
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  background: var(--primary-color);
+  content: '';
+  filter: blur(60px);
+  opacity: 0.08;
+  pointer-events: none;
+}
+
+.time-progress-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border-color);
+  background: linear-gradient(
+    90deg,
+    var(--second-background-color),
+    transparent
+  );
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.time-progress-header::after {
+  position: absolute;
+  bottom: -1px;
+  left: 16px;
+  width: 34px;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--primary-color);
+  content: '';
+}
+
+.time-progress-header-icon {
+  color: var(--primary-color);
+  font-size: 1rem;
+}
+
+.time-progress-list {
+  display: grid;
+  gap: 17px;
+  padding: 16px 15px 17px;
+}
+
+.time-progress-heading,
+.time-progress-detail {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.time-progress-heading {
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.time-progress-percent {
+  color: var(--progress-color);
+  font-size: 0.84rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.time-progress-track {
+  position: relative;
+  height: 9px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--second-background-color);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.12);
+}
+
+.time-progress-fill {
+  position: relative;
+  width: 0;
+  height: 100%;
+  border-radius: inherit;
+  background-color: var(--progress-soft-color);
+  background-image: linear-gradient(
+    135deg,
+    var(--progress-color) 25%,
+    transparent 25%,
+    transparent 50%,
+    var(--progress-color) 50%,
+    var(--progress-color) 75%,
+    transparent 75%,
+    transparent
+  );
+  background-size: 22px 22px;
+  box-shadow: 0 0 9px var(--progress-glow-color);
+  animation: time-progress-flow 0.9s linear infinite;
+  transition: width 0.45s ease;
+}
+
+.time-progress-fill::after {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.28),
+    transparent 70%
+  );
+  content: '';
+  pointer-events: none;
+}
+
+.time-progress-item[data-progress="summer"] {
+  --progress-color: #4faee8;
+  --progress-soft-color: #b9e2fa;
+  --progress-glow-color: rgba(79, 174, 232, 0.28);
+}
+
+.time-progress-item[data-progress="month"] {
+  --progress-color: #eeb43b;
+  --progress-soft-color: #f9df9b;
+  --progress-glow-color: rgba(238, 180, 59, 0.26);
+}
+
+.time-progress-item[data-progress="year"] {
+  --progress-color: #63ac47;
+  --progress-soft-color: #b9dcaa;
+  --progress-glow-color: rgba(99, 172, 71, 0.25);
+}
+
+.time-progress-detail {
+  margin-top: 7px;
+  color: var(--third-text-color);
+  font-size: 0.73rem;
+  line-height: 1.4;
+}
+
+@keyframes time-progress-flow {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: 22px 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .time-progress-fill {
+    animation: none;
+    transition: none;
+  }
+}
